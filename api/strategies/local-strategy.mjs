@@ -1,10 +1,10 @@
 import passport from 'passport';
 import { Strategy } from 'passport-local';
 import { UserModel } from '../schemas/user.mjs';
+import bcrypt from 'bcrypt';
 
 //add user to the session with a given unique key ( could be anything but id is convection)
 passport.serializeUser((user, done) => {
-  console.log('Inside serialize User');
   done(null, user.id);
 });
 
@@ -25,9 +25,8 @@ export default passport.use(
     try {
       const findUser = await UserModel.findOne({ email });
       if (!findUser) throw new Error('User not found');
-      console.log('findUser password is', findUser.password);
-      if (findUser.password !== password)
-        throw new Error('Invalid credentials');
+      const match = await bcrypt.compare(password, findUser.password);
+      if (!match) throw new Error('Invalid credentials');
       done(null, findUser);
     } catch (error) {
       done(error, null);
