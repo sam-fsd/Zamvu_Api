@@ -12,6 +12,7 @@
   "author": "Sam Kabiru & Charles Otonda",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "connect-mongo": "^5.1.0",
     "express": "^4.19.1",
     "express-session": "^1.18.0",
