@@ -11,7 +11,7 @@ const propertySchema = new mongoose.Schema({
   },
   type: {
     type: mongoose.Schema.Types.String,
-    required: true,
+    required: false,
   },
   description: {
     type: mongoose.Schema.Types.String,

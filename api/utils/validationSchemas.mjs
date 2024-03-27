@@ -81,4 +81,19 @@ export const createTenantValidationSchema = {
       errorMessage: 'Property id should be a string',
     },
   },
+  phone: {
+    notEmpty: true,
+    isString: {
+      errorMessage: 'Property id should be a string',
+    },
+  },
+};
+
+export const deleteUserValidationSchema = {
+  email: {
+    notEmpty: {
+      errorMessage: 'email field is required',
+    },
+    isEmail: true,
+  },
 };

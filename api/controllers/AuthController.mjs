@@ -38,4 +38,10 @@ export class AuthController {
       });
     });
   }
+
+  static getStatus(request, response) {
+    if (!request.user)
+      return response.status(200).json({ msg: 'You are not logged-in' });
+    return response.status(200).json({ msg: 'You are logged-in' });
+  }
 }
