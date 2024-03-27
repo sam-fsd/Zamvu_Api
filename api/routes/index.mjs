@@ -1,9 +1,10 @@
 import { Router } from 'express';
-import { UsersConroller } from '../controllers/UsersController.mjs';
+import { UsersController } from '../controllers/UsersController.mjs';
 import {
   createPropertyValidationSchema,
   createTenantValidationSchema,
   createUserValidationSchema,
+  deleteUserValidationSchema,
 } from '../utils/validationSchemas.mjs';
 import '../strategies/local-strategy.mjs';
 import { AuthController } from '../controllers/AuthController.mjs';
@@ -18,14 +19,25 @@ const router = Router();
 router.post(
   '/api/v1/users',
   checkSchema(createUserValidationSchema),
-  UsersConroller.createUser
+  UsersController.createUser
 );
 
+router.post(
+  '/api/v1/users/me',
+  checkSchema(deleteUserValidationSchema),
+  UsersController.deleteUser
+);
+
+router.patch('/api/v1/users', UsersController.updateWithDetails);
+
+/* Auth endpoints*/
 router.post(
   '/api/v1/auth',
   passport.authenticate('local'),
   AuthController.authenticate
 );
+
+router.get('/api/v1/auth/status', AuthController.getStatus);
 
 router.post('/api/v1/auth/logout', AuthController.logout);
 
@@ -37,6 +49,16 @@ router.post(
 );
 
 router.get('/api/v1/properties', PropertyController.getAllProperties);
+
+router.delete(
+  '/api/v1/properties/:id',
+  param('id')
+    .notEmpty()
+    .withMessage('provide property ID')
+    .isString()
+    .withMessage('property id must be a string'),
+  PropertyController.deleteProperty
+);
 
 /* Tenant endpoints */
 router.post(
@@ -54,6 +76,7 @@ router.get(
     .withMessage('property id must be a string'),
   TenantsController.getTenantsForProperty
 );
+
 router.delete(
   '/api/v1/tenants/:tenantId',
   param('tenantId')

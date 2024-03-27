@@ -1,6 +1,6 @@
 /* Contains all route handlers for property endpoints */
 
-import { matchedData } from 'express-validator';
+import { matchedData, validationResult } from 'express-validator';
 import { PropertyModel } from '../schemas/property.mjs';
 
 /**
@@ -60,9 +60,15 @@ export class PropertyController {
     if (!request.user)
       return response.status(401).json({ msg: 'You are not logged in' });
 
+    const result = validationResult(request);
+    if (!result.isEmpty())
+      return response.status(400).json({
+        msg: 'The property Id should be a valid string and not empty',
+      });
+
     PropertyModel.findByIdAndDelete(id)
       .then((deletedProperty) => {
-        return response.status(204).json(deletedProperty);
+        return response.status(204);
       })
       .catch((err) => {
         return response.status(400).json({ err });

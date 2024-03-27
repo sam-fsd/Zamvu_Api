@@ -9,8 +9,7 @@ const tenantSchema = mongoose.Schema({
   name: { type: mongoose.Schema.Types.String, required: true },
   email: {
     type: mongoose.Schema.Types.String,
-    // required: true,
-    unique: true,
+    required: true,
   },
   phone: {
     type: mongoose.Schema.Types.String,
