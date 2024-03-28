@@ -31,7 +31,7 @@ _This document servers as a reference for developers intergrating with the Zamvu
 Zamvu exposes several enpoints to create property, add tenants to a given property, delete a tenant, delete a property, etc. <br>
 **Note:** _Most of the endpoints that provide CRUD functionality require authentication. Zamvu provides a session-token based authentication_ <br>
 
-**The data standard format is in json format. Server reponds with JSON and expects JSON in its body for non-safe methods such as POST, PUT, etc**
+**The data standard format is in json format. Server reponds with JSON and expects JSON in its body for [unsafe](https://www.rfc-editor.org/rfc/rfc9110.html#name-common-method-properties) methods such as POST, PUT, etc**
 
 ### Status Codes
 
