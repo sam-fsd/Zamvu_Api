@@ -14,14 +14,14 @@ const tenantSchema = mongoose.Schema({
   phone: {
     type: mongoose.Schema.Types.String,
   },
-  // leaseStartDate: {
-  //   type: mongoose.Schema.Types.Date,
-  //   required: true,
-  // },
-  // leaseEndDate: {
-  //   type: mongoose.Schema.Types.Date,
-  //   required: true,
-  // },
+  leaseStartDate: {
+    type: Date,
+    required: true,
+  },
+  leaseEndDate: {
+    type: mongoose.Schema.Types.Date,
+    default: '',
+  },
 });
 
 export const TenantModel = mongoose.model('Tenant', tenantSchema);

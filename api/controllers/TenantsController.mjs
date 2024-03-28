@@ -37,8 +37,8 @@ export class TenantsController {
     if (!result.isEmpty())
       return response.status(400).json({ msg: 'Entered wrong details' });
     const data = matchedData(request);
-    console.log('tenant data', data);
     const { propertyId } = data;
+
     const newTenant = new TenantModel(data);
     newTenant.property = propertyId;
 

@@ -72,9 +72,13 @@ export const createTenantValidationSchema = {
   email: {
     isEmail: true,
   },
-  // leaseStartDate: {
-  //   notEmpty: true,
-  // },
+  leaseStartDate: {
+    notEmpty: true,
+    isString: {
+      errorMessage:
+        'leaseStartDate should be a string in this format YYYY-MM-DD',
+    },
+  },
   propertyId: {
     notEmpty: true,
     isString: {
