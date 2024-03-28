@@ -60,6 +60,11 @@ router.delete(
   PropertyController.deleteProperty
 );
 
+router.patch(
+  '/api/v1/properties/:propertyId',
+  PropertyController.updateProperty
+);
+
 /* Tenant endpoints */
 router.post(
   '/api/v1/tenants',
