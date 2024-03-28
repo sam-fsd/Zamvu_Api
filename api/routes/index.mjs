@@ -60,6 +60,11 @@ router.delete(
   PropertyController.deleteProperty
 );
 
+router.patch(
+  '/api/v1/properties/:propertyId',
+  PropertyController.updateProperty
+);
+
 /* Tenant endpoints */
 router.post(
   '/api/v1/tenants',
@@ -68,13 +73,23 @@ router.post(
 );
 
 router.get(
-  '/api/v1/tenants/:propertyId',
-  param('propertyId')
+  '/api/v1/tenants',
+  query('propertyId')
     .notEmpty()
     .withMessage('provide property ID')
     .isString()
     .withMessage('property id must be a string'),
   TenantsController.getTenantsForProperty
+);
+
+router.get(
+  '/api/v1/tenants/:tenantId',
+  param('tenantId')
+    .notEmpty()
+    .withMessage('provide tenant ID')
+    .isString()
+    .withMessage('Tenant id must be a string'),
+  TenantsController.getTenant
 );
 
 router.delete(
@@ -85,5 +100,15 @@ router.delete(
     .isString()
     .withMessage('Tenant id must be a string'),
   TenantsController.deleteTenant
+);
+
+router.patch(
+  '/api/v1/tenants/:tenantId',
+  param('tenantId')
+    .notEmpty()
+    .withMessage('provide tenant ID')
+    .isString()
+    .withMessage('Tenant id must be a string'),
+  TenantsController.updateTenant
 );
 export default router;

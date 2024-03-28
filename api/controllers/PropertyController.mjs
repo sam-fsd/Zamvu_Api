@@ -74,4 +74,44 @@ export class PropertyController {
         return response.status(400).json({ err });
       });
   }
+
+  static async updateProperty(request, response) {
+    if (!request.user)
+      return response.status(401).send({ msg: 'You are not logged in' });
+    //Get the update fields
+    const { body } = request;
+    const { propertyId } = request.params;
+
+    const allowedUpdates = Object.keys(PropertyModel.schema.paths); // Get schema field names
+    for (const key in body) {
+      if (!(body.hasOwnProperty(key) && allowedUpdates.includes(key))) {
+        return response
+          .status(400)
+          .json({ msg: `Invalid update field: ${key}` });
+      }
+    }
+    const query = { ...body };
+
+    //fetch the property to update
+    try {
+      //update its details with the given fields
+      const findProperty = await PropertyModel.findByIdAndUpdate(
+        propertyId,
+        query,
+        {
+          new: true,
+        }
+      );
+      if (!findProperty) throw new Error('property not found');
+      return response.status(200).json({
+        msg: 'Property updated with the given fields',
+        updatedProperty: findProperty,
+      });
+    } catch (error) {
+      return response.status(400).json({
+        msg: 'Error occured while updating fields. Ensure you are giving correct fields',
+        error,
+      });
+    }
+  }
 }
