@@ -70,11 +70,11 @@ The API returns standard HTTP status codes to indicate the outcome of requests. 
 
 ### Tenant Endpoints
 
-| Method | URL                    | Description                                | Fields                                                                                                                                                                                              | Requires Auth |
-| ------ | ---------------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| POST   | `/tenants`             | Add a new tenant                           | **`name*`**: `String` <br> **`email*:`** `String` <br> **`phone*:`** `String` <br> **`propertyId*:`** `String` **`leaseStartDate*:`** `String(YYYY-MM-DD)` **`leaseEndDate:`** `String(YYYY-MM-DD)` | Yes           |
-| GET    | `/tenants/:propertyId` | Get all tenants associated with a property | N/A                                                                                                                                                                                                 | Yes           |
-| DELETE | `/tenants/:tenantId`   | Delete a tenant by ID                      | N/A                                                                                                                                                                                                 | Yes           |
+| Method | URL                                  | Description                                | Fields                                                                                                                                                                                              | Requires Auth |
+| ------ | ------------------------------------ | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| POST   | `/tenants`                           | Add a new tenant                           | **`name*`**: `String` <br> **`email*:`** `String` <br> **`phone*:`** `String` <br> **`propertyId*:`** `String` **`leaseStartDate*:`** `String(YYYY-MM-DD)` **`leaseEndDate:`** `String(YYYY-MM-DD)` | Yes           |
+| GET    | `/tenants/?propertyId={property ID}` | Get all tenants associated with a property | N/A                                                                                                                                                                                                 | Yes           |
+| DELETE | `/tenants/:tenantId`                 | Delete a tenant by ID                      | N/A                                                                                                                                                                                                 | Yes           |
 
 ## Authors
 
