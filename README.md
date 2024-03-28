@@ -31,7 +31,7 @@ _This document servers as a reference for developers intergrating with the Zamvu
 Zamvu exposes several enpoints to create property, add tenants to a given property, delete a tenant, delete a property, etc. <br>
 **Note:** _Most of the endpoints that provide CRUD functionality require authentication. Zamvu provides a session-token based authentication_ <br>
 
-**The data standard format is in json format. Server reponds with JSON and expects JSON in its body for non-idempotent methods**
+**The data standard format is in json format. Server reponds with JSON and expects JSON in its body for non-safe methods such as POST, PUT, etc**
 
 ### Status Codes
 
@@ -70,11 +70,11 @@ The API returns standard HTTP status codes to indicate the outcome of requests. 
 
 ### Tenant Endpoints
 
-| Method | URL                    | Description                                | Fields                                                                                                                                                     | Requires Auth |
-| ------ | ---------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| POST   | `/tenants`             | Add a new tenant                           | **`name*`**: `String` <br> **`email*:`** `String` <br> **`phone*:`** `String` <br> **`propertyId*:`** `String` **`leaseStartDate*:`** `String(YYYY-MM-DD)` | Yes           |
-| GET    | `/tenants/:propertyId` | Get all tenants associated with a property | N/A                                                                                                                                                        | Yes           |
-| DELETE | `/tenants/:tenantId`   | Delete a tenant by ID                      | N/A                                                                                                                                                        | Yes           |
+| Method | URL                    | Description                                | Fields                                                                                                                                                                                              | Requires Auth |
+| ------ | ---------------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| POST   | `/tenants`             | Add a new tenant                           | **`name*`**: `String` <br> **`email*:`** `String` <br> **`phone*:`** `String` <br> **`propertyId*:`** `String` **`leaseStartDate*:`** `String(YYYY-MM-DD)` **`leaseEndDate:`** `String(YYYY-MM-DD)` | Yes           |
+| GET    | `/tenants/:propertyId` | Get all tenants associated with a property | N/A                                                                                                                                                                                                 | Yes           |
+| DELETE | `/tenants/:tenantId`   | Delete a tenant by ID                      | N/A                                                                                                                                                                                                 | Yes           |
 
 ## Authors
 
