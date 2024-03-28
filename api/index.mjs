@@ -4,6 +4,7 @@ import session from 'express-session';
 import passport from 'passport';
 import MongoStore from 'connect-mongo';
 import routes from './routes/index.mjs';
+import cors from 'cors';
 
 const PORT = process.env.PORT || 3001;
 const DBURL = `mongodb://localhost/Zamvu_data_store`;
@@ -13,6 +14,8 @@ mongoose
   .connect(DBURL)
   .then(() => console.log(`Connected to Zamvu DB`))
   .catch((err) => console.log(`Did not connect to DB`, err));
+
+app.use(cors());
 
 app.use(express.json());
 app.use(
